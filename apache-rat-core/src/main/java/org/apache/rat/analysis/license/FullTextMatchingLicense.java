@@ -18,12 +18,13 @@
  */ 
 package org.apache.rat.analysis.license;
 
-import java.util.Locale;
-
 import org.apache.rat.analysis.IHeaderMatcher;
 import org.apache.rat.analysis.RatHeaderAnalysisException;
 import org.apache.rat.api.Document;
 import org.apache.rat.api.MetaData.Datum;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Accumulates all letters and numbers contained inside the header and
@@ -42,7 +43,9 @@ public class FullTextMatchingLicense extends BaseLicense
     private static final int DEFAULT_INITIAL_LINE_LENGTH = 20;
 
     private String fullText;
-    
+
+    private Pattern fullTextPattern;
+
     private String firstLine;
 
     private boolean seenFirstLine = false;
@@ -60,6 +63,15 @@ public class FullTextMatchingLicense extends BaseLicense
         setFullText(fullText);
     }
 
+    protected FullTextMatchingLicense(Datum licenseFamilyCategory,
+                                      Datum licenseFamilyName,
+                                      String notes,
+                                      String fullText,
+                                      Pattern fullTextPattern) {
+        this(licenseFamilyCategory, licenseFamilyName, notes, fullText);
+        setFullTextPattern(fullTextPattern);
+    }
+
     public final void setFullText(String text) {
         int offset = text.indexOf('\n');
         if (offset == -1) {
@@ -72,6 +84,10 @@ public class FullTextMatchingLicense extends BaseLicense
 
     public final boolean hasFullText() {
         return fullText != null;
+    }
+
+    public final boolean hasFullTextPattern() {
+        return fullTextPattern != null;
     }
 
     public boolean match(Document subject, String line) throws RatHeaderAnalysisException {
@@ -90,9 +106,11 @@ public class FullTextMatchingLicense extends BaseLicense
                 return false; // no more to do here
             }
         }
- 
+
         if (buffer.length() >= fullText.length()) { // we have enough data to match
-            if (buffer.toString().contains(fullText)) {
+            String bufferString = buffer.toString();
+            if (bufferString.contains(fullText) ||
+                    (hasFullTextPattern() && fullTextPattern.matcher(bufferString).find())) {
                 reportOnLicense(subject);
                 return true; // we found a match
             } else { // buffer contains first line but does not contain full text
@@ -116,5 +134,9 @@ public class FullTextMatchingLicense extends BaseLicense
     private void init() {
         buffer.setLength(0);
         seenFirstLine = false;
+    }
+
+    public void setFullTextPattern(Pattern fullTextPattern) {
+        this.fullTextPattern = fullTextPattern;
     }
 }

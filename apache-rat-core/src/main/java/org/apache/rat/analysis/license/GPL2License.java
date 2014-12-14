@@ -15,23 +15,29 @@
  * KIND, either express or implied.  See the License for the    *
  * specific language governing permissions and limitations      *
  * under the License.                                           *
- */ 
+ */
 package org.apache.rat.analysis.license;
 
 import org.apache.rat.api.MetaData;
 
+import java.util.regex.Pattern;
+
 /**
- * Licence matches GPL2 or later.
+ * License matches GPL2 or later.
  */
 public class GPL2License extends FullTextMatchingLicense {
-    public static final String FIRST_LICENSE_LINE = "This program is free software; you can redistribute it and/or\n" +
-            " modify it under the terms of the GNU General Public License\n" +
-            " as published by the Free Software Foundation; either version 2\n" +
+    public static final String FIRST_LICENSE_LINE = "This program";
+    public static final String SECOND_LICENSE_LINE = " is free software; you can redistribute it and/or" +
+            " modify it under the terms of the GNU General Public License" +
+            " as published by the Free Software Foundation; either version 2" +
             " of the License, or (at your option) any later version.";
+
+    private static final Pattern LICENSE_PATTERN = Pattern.compile(new String(
+            "(" + prune(FIRST_LICENSE_LINE) + ")?" + prune(SECOND_LICENSE_LINE)).toLowerCase());
 
     public GPL2License() {
         super(MetaData.RAT_LICENSE_FAMILY_CATEGORY_DATUM_GPL2,
                 MetaData.RAT_LICENSE_FAMILY_NAME_DATUM_GPL_VERSION_2,
-                "", FIRST_LICENSE_LINE);
+                "", SECOND_LICENSE_LINE, LICENSE_PATTERN);
     }
 }

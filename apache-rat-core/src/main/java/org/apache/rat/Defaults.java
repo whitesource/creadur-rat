@@ -21,17 +21,7 @@ package org.apache.rat;
 import org.apache.rat.analysis.IHeaderMatcher;
 import org.apache.rat.analysis.generation.GeneratedLicenseNotRequired;
 import org.apache.rat.analysis.generation.JavaDocLicenseNotRequired;
-import org.apache.rat.analysis.license.ApacheSoftwareLicense20;
-import org.apache.rat.analysis.license.CDDL1License;
-import org.apache.rat.analysis.license.DojoLicenseHeader;
-import org.apache.rat.analysis.license.GPL1License;
-import org.apache.rat.analysis.license.GPL2License;
-import org.apache.rat.analysis.license.GPL3License;
-import org.apache.rat.analysis.license.MITLicense;
-import org.apache.rat.analysis.license.OASISLicense;
-import org.apache.rat.analysis.license.TMF854LicenseHeader;
-import org.apache.rat.analysis.license.W3CDocLicense;
-import org.apache.rat.analysis.license.W3CLicense;
+import org.apache.rat.analysis.license.*;
 import org.apache.rat.analysis.util.HeaderMatcherMultiplexer;
 
 import java.io.InputStream;
@@ -64,7 +54,12 @@ public class Defaults {
                     new GeneratedLicenseNotRequired(),
                     new DojoLicenseHeader(),
                     new TMF854LicenseHeader(),
-                    new CDDL1License()));
+                    new CDDL1License(),
+                    new LGPL21License(),
+                    new LGPL3License(),
+                    new AGPL3License(),
+                    new BSD2License(),
+                    new BSD3License()));
     
     public static final String PLAIN_STYLESHEET = "org/apache/rat/plain-rat.xsl";
     public static final String UNAPPROVED_LICENSES_STYLESHEET = "org/apache/rat/unapproved-licenses.xsl";

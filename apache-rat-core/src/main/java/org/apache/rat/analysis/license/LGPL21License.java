@@ -23,21 +23,20 @@ import org.apache.rat.api.MetaData;
 import java.util.regex.Pattern;
 
 /**
- * License matches GPL1 or later.
+ * License matches LGPL 2.1 or later.
  */
-public class GPL1License extends FullTextMatchingLicense {
-    public static final String FIRST_LICENSE_LINE = "This program";
-    public static final String SECOND_LICENSE_LINE = " is free software; you can redistribute it and/or modify" +
-            " it under the terms of the GNU General Public License as published by" +
-            " the Free Software Foundation; either version 1, or (at your option)" +
-            " any later version.";
+public class LGPL21License extends FullTextMatchingLicense {
+    public static final String FIRST_LICENSE_LINE = "This library";
+    public static final String SECOND_LICENSE_LINE = " is free software; you can redistribute it " +
+            "and/or modify it under the terms of the GNU Lesser General Public License as published by the " +
+            "Free Software Foundation; either version 2.1 of the License, or (at your option) any later version.";
 
     private static final Pattern LICENSE_PATTERN = Pattern.compile(new String(
             "(" + prune(FIRST_LICENSE_LINE) + ")?" + prune(SECOND_LICENSE_LINE)).toLowerCase());
 
-    public GPL1License() {
-        super(MetaData.RAT_LICENSE_FAMILY_CATEGORY_DATUM_GPL1,
-                MetaData.RAT_LICENSE_FAMILY_NAME_DATUM_GPL_VERSION_1,
+    public LGPL21License() {
+        super(MetaData.RAT_LICENSE_FAMILY_CATEGORY_DATUM_LGPL21,
+                MetaData.RAT_LICENSE_FAMILY_NAME_DATUM_LGPL_VERSION_2_1,
                 "", SECOND_LICENSE_LINE, LICENSE_PATTERN);
     }
 }
