@@ -47,6 +47,10 @@ public class Defaults {
                     new GPL2License(),
                     new GPL3License(),
                     new MITLicense(),
+                    new MPL2License(),
+                    new PublicDomainLicense(),
+                    new MicrosoftLicense(),
+                    new EPL1License(),
                     new W3CLicense(),
                     new W3CDocLicense(),
                     new OASISLicense(),
@@ -59,7 +63,14 @@ public class Defaults {
                     new LGPL3License(),
                     new AGPL3License(),
                     new BSD2License(),
-                    new BSD3License()));
+                    new BSD3License(),
+                    new BSD4License(),
+                    new AFL11License(),
+                    new AFL12License(),
+                    new AFL20License(),
+                    new AFL21License(),
+                    new AFL30License()
+            ));
     
     public static final String PLAIN_STYLESHEET = "org/apache/rat/plain-rat.xsl";
     public static final String UNAPPROVED_LICENSES_STYLESHEET = "org/apache/rat/unapproved-licenses.xsl";
