@@ -69,7 +69,9 @@ public class Defaults {
                     new AFL12License(),
                     new AFL20License(),
                     new AFL21License(),
-                    new AFL30License()
+                    new AFL30License(),
+                    new ApplePublicSourceLicense20(),
+                    new ZlibLicense()
             ));
     
     public static final String PLAIN_STYLESHEET = "org/apache/rat/plain-rat.xsl";
