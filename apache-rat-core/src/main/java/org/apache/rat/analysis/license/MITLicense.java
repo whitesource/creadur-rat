@@ -20,17 +20,27 @@ package org.apache.rat.analysis.license;
 
 import org.apache.rat.api.MetaData;
 
+import java.util.regex.Pattern;
+
 /**
  * Base MIT license (all 3 parts).
  */
 public class MITLicense extends FullTextMatchingLicense {
     public static final String FIRST_LICENSE_LINE = "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:";
     public static final String MIDDLE_LICENSE_LINE = "The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.";
-    public static final String AS_IS_LICENSE_LINE = "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";
+    public static final String AS_IS_LICENSE_LINE_1 = "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL";
+    public static final String AS_IS_LICENSE_LINE_2 = "BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.";
+    public static final String THE_AUTHORS_OR_COPYRIGHT_HOLDERS = " THE AUTHORS OR COPYRIGHT HOLDERS ";
+    public static final String AS_IS_LICENSE_LINE = AS_IS_LICENSE_LINE_1 + THE_AUTHORS_OR_COPYRIGHT_HOLDERS + AS_IS_LICENSE_LINE_2;
+
+    public static final Pattern LICENSE_PATTERN = Pattern.compile(new String(
+            prune(FIRST_LICENSE_LINE) + prune(MIDDLE_LICENSE_LINE) +
+                    prune(AS_IS_LICENSE_LINE_1) + ".*" + prune(AS_IS_LICENSE_LINE_2))
+            .toLowerCase());
 
     public MITLicense() {
-        super(MetaData.RAT_LICENSE_FAMILY_CATEGORY_DATUM_MIT,
-                MetaData.RAT_LICENSE_FAMILY_NAME_DATUM_MIT,
-                "", FIRST_LICENSE_LINE + MIDDLE_LICENSE_LINE + AS_IS_LICENSE_LINE);
+        super(MetaData.RAT_LICENSE_FAMILY_CATEGORY_DATUM_MIT, MetaData.RAT_LICENSE_FAMILY_NAME_DATUM_MIT, "",
+                FIRST_LICENSE_LINE + MIDDLE_LICENSE_LINE + AS_IS_LICENSE_LINE,
+                LICENSE_PATTERN);
     }
 }

@@ -23,7 +23,7 @@
     <version>0.12-WSS</version>
   </parent>
   <artifactId>apache-rat-core</artifactId>
-  <version>0.12.1-WSS</version>
+  <version>0.12.2-WSS</version>
   <packaging>jar</packaging>
   <name>Apache Creadur Rat::Core</name>
   <description>The core functionality, shared by the Ant tasks

@@ -43,6 +43,7 @@ public class Defaults {
      */
     public static final List<IHeaderMatcher> DEFAULT_MATCHERS = Collections.unmodifiableList(
             Arrays.asList(new ApacheSoftwareLicense20(),
+                    new ApacheLicense20Pattern(),
                     new GPL1License(),
                     new GPL2License(),
                     new GPL3License(),
